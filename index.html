@@ -11,6 +11,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="install.css" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Komok" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="stylesheet" href="ui-refresh.css" />
   </head>
   <body>
     <section class="auth-screen" id="loginScreen" aria-labelledby="loginTitle">
@@ -25,6 +33,7 @@
         </button>
         <p class="auth-note" data-i18n="login_note">Only GitHub sign-in is available.</p>
         <div class="auth-error hidden" id="authError" role="alert"></div>
+        <button class="download-app-button download-app-button--auth" type="button" data-download-app aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg><span>Скачать приложение</span></button>
       </div>
       <div class="auth-footer">Komok Translate</div>
     </section>
@@ -38,6 +47,7 @@
           <span class="brand-name">Komok<span>Translate</span></span>
         </a>
         <div class="topbar-actions">
+          <button class="download-app-button" type="button" data-download-app aria-haspopup="dialog" title="Скачать приложение"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg><span>Скачать приложение</span></button>
           <label class="ui-language-control" aria-label="Interface language"><span class="sr-only" data-i18n="interface_language">Interface language</span><select id="uiLanguage"></select></label>
           <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle theme" title="Toggle theme">
             <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
@@ -66,5 +76,6 @@
       <footer class="footer"><span>© 2026 Komok</span><span data-i18n="footer_note">Made to help people understand each other.</span></footer>
     </section>
     <script src="app.js"></script>
+    <script src="install.js"></script>
   </body>
 </html>

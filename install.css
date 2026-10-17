@@ -1,0 +1,53 @@
+/* Komok Translate — кнопка «Скачать приложение» и окно установки.
+ * Отдельный файл, чтобы не пересекаться с общим styles.css. Использует его CSS-переменные. */
+.download-app-button { display: inline-flex; align-items: center; gap: 7px; height: 38px; padding: 0 14px 0 11px; color: #fff; border: 0; border-radius: 999px; background: var(--accent, #5f6df6); box-shadow: 0 8px 20px rgba(95,109,246,.25); font: 700 12px/1 "DM Sans", system-ui, sans-serif; cursor: pointer; white-space: nowrap; transition: transform .2s ease, background .2s ease; }
+.download-app-button:hover { background: var(--accent-deep, #4352db); transform: translateY(-1px); }
+.download-app-button:focus-visible { outline: 3px solid var(--accent-soft, rgba(95,109,246,.3)); outline-offset: 2px; }
+.download-app-button svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.download-app-button[hidden] { display: none !important; }
+.download-app-button--auth { width: 100%; height: 46px; justify-content: center; margin-top: 12px; color: var(--ink, #171a24); background: transparent; border: 1px solid var(--line-strong, rgba(25,30,43,.16)); box-shadow: none; font-size: 13px; }
+.download-app-button--auth:hover { color: var(--accent-deep, #4352db); background: var(--accent-soft, rgba(95,109,246,.11)); }
+
+.install-dialog { width: min(560px, calc(100vw - 24px)); max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px); padding: 0; color: var(--ink, #171a24); border: 1px solid var(--line, rgba(25,30,43,.1)); border-radius: var(--radius-xl, 28px); background: var(--surface-solid, #fff); box-shadow: var(--shadow); font-family: "DM Sans", system-ui, sans-serif; }
+.install-dialog::backdrop { background: rgba(14,16,26,.45); backdrop-filter: blur(4px); }
+.install-dialog[open] { animation: install-in .22s ease-out; }
+@keyframes install-in { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
+.install-card { padding: 22px 22px 24px; }
+.install-head { display: flex; align-items: center; gap: 12px; }
+.install-head img { flex: none; border-radius: 12px; }
+.install-head h2 { margin: 0; font: 800 19px/1.2 Manrope, sans-serif; letter-spacing: -.03em; }
+.install-head p { margin: 3px 0 0; color: var(--muted, #777d8b); font-size: 13px; }
+.install-close { flex: none; width: 36px; height: 36px; margin-left: auto; color: var(--muted-strong, #555c6b); border: 1px solid var(--line, rgba(25,30,43,.1)); border-radius: 50%; background: transparent; font-size: 22px; line-height: 1; cursor: pointer; }
+.install-close:hover { color: var(--accent-deep, #4352db); }
+.install-tabs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 18px 0 16px; }
+.install-tab { position: relative; display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 11px 4px 9px; color: var(--muted-strong, #555c6b); border: 1px solid var(--line, rgba(25,30,43,.1)); border-radius: var(--radius-md, 14px); background: var(--surface-soft, #f4f5f9); font: 700 12px/1 "DM Sans", system-ui, sans-serif; cursor: pointer; transition: border-color .2s ease, background .2s ease, color .2s ease; }
+.install-tab svg { width: 22px; height: 22px; }
+.install-tab:hover { color: var(--ink, #171a24); border-color: var(--line-strong, rgba(25,30,43,.16)); }
+.install-tab.is-active { color: var(--accent-deep, #4352db); border-color: var(--accent, #5f6df6); background: var(--accent-soft, rgba(95,109,246,.11)); }
+.install-badge { display: none; position: absolute; top: -7px; right: -4px; padding: 3px 6px; color: #fff; border-radius: 999px; background: var(--success, #49ab85); font-size: 9px; font-weight: 700; }
+.install-tab.is-detected .install-badge { display: block; }
+.install-panel { font-size: 14px; line-height: 1.55; }
+.install-panel:focus { outline: none; }
+.install-panel h3 { margin: 0 0 8px; font: 800 16px/1.3 Manrope, sans-serif; }
+.install-panel p { margin: 0 0 12px; color: var(--muted-strong, #555c6b); }
+.install-panel code { padding: 1px 5px; border-radius: 6px; background: var(--surface-soft, #f4f5f9); font-size: 12px; overflow-wrap: anywhere; }
+.install-steps { margin: 14px 0; padding-left: 22px; }
+.install-steps li { margin-bottom: 7px; }
+.install-primary, .install-secondary { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 18px; margin-bottom: 4px; border-radius: var(--radius-md, 14px); font: 700 14px/1 "DM Sans", system-ui, sans-serif; text-decoration: none; cursor: pointer; }
+.install-primary { color: #fff; border: 0; background: var(--accent, #5f6df6); }
+.install-primary:hover { background: var(--accent-deep, #4352db); }
+.install-primary.is-disabled { opacity: .55; cursor: progress; }
+.install-secondary { color: var(--accent-deep, #4352db); border: 1px solid var(--accent, #5f6df6); background: transparent; }
+.install-note { padding: 10px 12px; border-radius: 12px; background: var(--surface-soft, #f4f5f9); font-size: 13px; }
+.install-pwa { margin: 4px 0 16px; padding: 14px; border: 1px dashed var(--line-strong, rgba(25,30,43,.16)); border-radius: var(--radius-md, 14px); }
+.install-pwa p { margin-bottom: 10px; }
+body[data-theme="dark"] .install-dialog { background: #0b0b0b; border-color: #292929; }
+body[data-theme="dark"] .install-tab, body[data-theme="dark"] .install-note, body[data-theme="dark"] .install-panel code { background: #101010; border-color: #292929; }
+body[data-theme="dark"] .install-tab.is-active { background: rgba(212,111,93,.14); }
+@media (max-width: 700px) {
+  .download-app-button:not(.download-app-button--auth) { width: 38px; padding: 0; justify-content: center; }
+  .download-app-button:not(.download-app-button--auth) span { display: none; }
+  .install-card { padding: 18px 16px 20px; }
+  .install-tab span { font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) { .install-dialog[open] { animation: none; } }

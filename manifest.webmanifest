@@ -1,0 +1,21 @@
+{
+  "id": "./",
+  "name": "Komok Translate",
+  "short_name": "Komok",
+  "description": "Komok Translate — спокойный многоязычный переводчик.",
+  "lang": "ru",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#f7f8fc",
+  "theme_color": "#f7f8fc",
+  "categories": ["productivity", "utilities", "education"],
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

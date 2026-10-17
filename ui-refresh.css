@@ -1,0 +1,73 @@
+/* Komok Translate — UI refresh (Dann). Loaded after styles.css, overrides only visuals. */
+:root {
+  --accent: #6366f1;
+  --accent-deep: #4f46e5;
+  --accent-warm: #f2785c;
+  --accent-soft: rgba(99, 102, 241, 0.1);
+  --gradient: linear-gradient(135deg, #f2785c 0%, #a855f7 48%, #6366f1 100%);
+  --radius-xl: 30px;
+  --radius-lg: 22px;
+}
+
+body { background: radial-gradient(1200px 600px at 85% -10%, rgba(242,120,92,.10), transparent 60%), radial-gradient(1000px 700px at -10% 110%, rgba(99,102,241,.12), transparent 60%), var(--bg); background-attachment: fixed; }
+
+/* Sticky glass top bar */
+.topbar { position: sticky; top: 0; z-index: 20; padding: 16px 0; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.topbar::before { content: ""; position: absolute; inset: 0 -100vw; z-index: -1; background: color-mix(in srgb, var(--bg) 72%, transparent); border-bottom: 1px solid var(--line); }
+.brand-mark { border-radius: 11px; box-shadow: 0 0 0 2px #fff, 0 8px 20px rgba(99,102,241,.25); }
+.brand-name span { background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.page-shell { padding-top: 64px; }
+
+/* Card entrance */
+@keyframes komok-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.translator-card, .examples-section, .history-section, .auth-card { animation: komok-rise .5s cubic-bezier(.2,.7,.2,1) both; }
+.examples-section { animation-delay: .08s; }
+.history-section { animation-delay: .14s; }
+
+/* Translator card */
+.translator-card { padding: 24px; }
+.translator-card::before { content: ""; position: absolute; inset: -1px; z-index: -1; border-radius: inherit; padding: 1px; background: var(--gradient); opacity: .35; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+.text-panel { transition: border-color .2s ease, box-shadow .2s ease; }
+.text-panel--source:focus-within { border-color: rgba(99,102,241,.45); box-shadow: 0 0 0 4px var(--accent-soft); }
+.swap-button { background: var(--surface-solid); border: 1px solid var(--line); box-shadow: 0 6px 16px rgba(47,51,83,.08); }
+.swap-button:hover { color: #fff; background: var(--gradient); border-color: transparent; }
+
+/* Primary button */
+.translate-button { border-radius: 999px; background: var(--gradient); background-size: 160% 160%; background-position: 0% 50%; box-shadow: 0 12px 26px rgba(168,85,247,.28); transition: background-position .5s ease, transform .2s ease, box-shadow .2s ease; }
+.translate-button:hover { background-position: 100% 50%; box-shadow: 0 16px 30px rgba(99,102,241,.34); }
+.translate-button.is-loading .button-arrow { animation: komok-spin 1s linear infinite; }
+@keyframes komok-spin { to { transform: rotate(360deg); } }
+
+/* Chips and history */
+.example-chip { background: var(--surface-solid); }
+.example-chip:hover { color: #fff; background: var(--gradient); border-color: transparent; }
+.history-item { transition: transform .2s ease, border-color .2s ease; }
+.history-item:hover { transform: translateY(-1px); border-color: rgba(99,102,241,.3); }
+
+/* Status dot pulse */
+.status-dot { box-shadow: 0 0 0 0 rgba(73,171,133,.5); animation: komok-pulse 2s ease-out infinite; }
+@keyframes komok-pulse { 70% { box-shadow: 0 0 0 7px rgba(73,171,133,0); } 100% { box-shadow: 0 0 0 0 rgba(73,171,133,0); } }
+
+/* Auth screen */
+.auth-screen { background: radial-gradient(800px 500px at 50% 0%, rgba(168,85,247,.12), transparent 70%), var(--bg); }
+.auth-logo { box-shadow: 0 0 0 3px #fff, 0 16px 34px rgba(99,102,241,.3); }
+.auth-brand span { background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.github-button { border-radius: 999px; }
+
+/* Footer */
+.footer { margin-top: 64px; }
+
+/* Dark theme */
+body[data-theme="dark"] { background: radial-gradient(1200px 600px at 85% -10%, rgba(242,120,92,.08), transparent 60%), radial-gradient(1000px 700px at -10% 110%, rgba(99,102,241,.10), transparent 60%), #000; }
+body[data-theme="dark"] .topbar::before { background: rgba(0,0,0,.6); }
+body[data-theme="dark"] .brand-mark, body[data-theme="dark"] .auth-logo { box-shadow: 0 0 0 2px #111, 0 8px 20px rgba(99,102,241,.3); }
+body[data-theme="dark"] .swap-button, body[data-theme="dark"] .example-chip { background: #0b0b0b; border-color: #292929; }
+body[data-theme="dark"] .translate-button, body[data-theme="dark"] .translate-button:hover { background: var(--gradient); background-size: 160% 160%; color: #fff; }
+body[data-theme="dark"] .example-chip:hover, body[data-theme="dark"] .swap-button:hover { background: var(--gradient); color: #fff; }
+
+@media (max-width: 700px) {
+  .topbar { padding: 12px 0; }
+  .page-shell { padding-top: 36px; }
+  .translator-card { padding: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { .translator-card, .examples-section, .history-section, .auth-card, .status-dot { animation: none !important; } }
