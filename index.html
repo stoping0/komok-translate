@@ -7,10 +7,17 @@
     <meta name="description" content="Komok Translate — a calm, multilingual translation workspace." />
     <title>Komok Translate</title>
     <link rel="icon" type="image/jpeg" href="assets/komok-translate-icon.jpeg" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Komok" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="install.css" />
   </head>
   <body>
     <section class="auth-screen" id="loginScreen" aria-labelledby="loginTitle">
@@ -66,5 +73,6 @@
       <footer class="footer"><span>© 2026 Komok</span><span data-i18n="footer_note">Made to help people understand each other.</span></footer>
     </section>
     <script src="app.js"></script>
+    <script src="install.js"></script>
   </body>
 </html>
