@@ -1,0 +1,8 @@
+{
+  "name": "komok-translate",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Komok Translate with GitHub OAuth",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=20" }
+}
