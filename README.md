@@ -43,3 +43,17 @@ https://api.mymemory.translated.net/get
 Код проекта написан как самостоятельный vanilla HTML/CSS/JS. Визуальное направление ориентировано на сдержанную премиальную эстетику потребительских технологий, но не копирует элементы Apple. Иконка Komok предоставлена владельцем проекта.
 
 Для будущей desktop-версии можно использовать MIT-шаблон [guasam/electron-react-app](https://github.com/guasam/electron-react-app), но текущая веб-версия специально оставлена без Electron, чтобы запускаться на Windows одной командой.
+
+## Установка приложения («Скачать приложение»)
+
+Кнопка «Скачать приложение» (на экране входа и в шапке) открывает окно выбора платформы с инструкциями на русском. Текущая платформа определяется автоматически и подсвечивается.
+
+- **iOS** — установка как PWA: Safari → «Поделиться» → «На экран „Домой“».
+- **Android** — APK из GitHub Releases + установка PWA через браузер (`beforeinstallprompt`), если доступна.
+- **Windows / macOS / Linux** — `.exe` / `.dmg` / `.AppImage` (и опционально `.deb`) из GitHub Releases; в Chrome/Edge также можно поставить PWA.
+
+Имена файлов сборок заданы в одном месте — константа `RELEASE_FILES` в начале `install.js`. Ссылки ведут на `https://github.com/stoping0/komok-translate/releases/latest/download/<файл>`. Пока файла в последнем релизе нет, окно показывает ссылку на страницу релизов вместо битой ссылки.
+
+Когда приложение установлено или запущено как отдельное окно (`display-mode: standalone`, `navigator.standalone`, событие `appinstalled`, флаг `komok-app-installed` в `localStorage`), кнопка скрывается.
+
+PWA: `manifest.webmanifest`, иконки `assets/icon-*.png`, service worker `sw.js` (офлайн-кэш оболочки). Все пути относительные, поэтому всё работает и на GitHub Pages (`/komok-translate/`), и через `server.js`. При изменении файлов оболочки увеличивайте `CACHE_VERSION` в `sw.js`.
