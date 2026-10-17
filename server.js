@@ -11,15 +11,12 @@ const CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 const SESSION_SECRET = process.env.SESSION_SECRET || crypto.randomBytes(32).toString("hex");
 const ROOT = __dirname;
 const CALLBACK_PATH = "/api/auth/github/callback";
+const REGISTERED_REDIRECT_URI = process.env.GITHUB_REDIRECT_URI || "https://stoping0.github.io/komok-translate/";
 
 function publicOrigin(req) {
   const forwardedProto = String(req.headers["x-forwarded-proto"] || "https").split(",")[0];
   const forwardedHost = String(req.headers["x-forwarded-host"] || req.headers.host || "localhost:3000").split(",")[0];
   return `${forwardedProto}://${forwardedHost}`;
-}
-
-function callbackUrl(req) {
-  return `${publicOrigin(req)}${CALLBACK_PATH}`;
 }
 
 function parseCookies(req) {
@@ -111,7 +108,7 @@ const server = http.createServer(async (req, res) => {
       const state = crypto.randomBytes(24).toString("hex");
       const auth = new URL("https://github.com/login/oauth/authorize");
       auth.searchParams.set("client_id", CLIENT_ID);
-      auth.searchParams.set("redirect_uri", callbackUrl(req));
+      auth.searchParams.set("redirect_uri", REGISTERED_REDIRECT_URI);
       auth.searchParams.set("scope", "read:user user:email");
       auth.searchParams.set("state", state);
       res.writeHead(302, { Location: auth.toString(), "Set-Cookie": cookie("komok_oauth_state", state) });
@@ -120,7 +117,7 @@ const server = http.createServer(async (req, res) => {
     if (url.pathname === CALLBACK_PATH) {
       const cookies = parseCookies(req);
       if (!url.searchParams.get("code") || !cookies.komok_oauth_state || cookies.komok_oauth_state !== url.searchParams.get("state")) return json(res, 400, { error: "Invalid OAuth state." });
-      const token = await requestJson("https://github.com/login/oauth/access_token", { method: "POST" }, { client_id: CLIENT_ID, client_secret: CLIENT_SECRET, code: url.searchParams.get("code"), redirect_uri: callbackUrl(req) });
+      const token = await requestJson("https://github.com/login/oauth/access_token", { method: "POST" }, { client_id: CLIENT_ID, client_secret: CLIENT_SECRET, code: url.searchParams.get("code"), redirect_uri: REGISTERED_REDIRECT_URI });
       if (!token.access_token) return json(res, 401, { error: "GitHub token exchange failed." });
       const user = await githubUser(token.access_token);
       res.writeHead(302, { Location: "/", "Set-Cookie": [cookie("komok_session", encodeSession(user), 60 * 60 * 24 * 14), cookie("komok_oauth_state", "", 0)] });

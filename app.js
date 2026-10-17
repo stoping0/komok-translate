@@ -5,6 +5,8 @@ const languageGroups = [
 const allLanguages = () => languageGroups.flatMap((group) => group.options);
 const languageName = (code) => code === "auto" ? "Auto-detect" : allLanguages().find(([value]) => value === code)?.[1] || code;
 const $ = (selector) => document.querySelector(selector);
+const OAUTH_SERVER_ORIGIN = "https://komok-mdzgrwkk.manus.space";
+const ON_GITHUB_PAGES = window.location.hostname.endsWith("github.io");
 const uiLanguage = $("#uiLanguage");
 const sourceLang = $("#sourceLang");
 const targetLang = $("#targetLang");
@@ -69,7 +71,14 @@ function showLogin(message = "") { $("#loginScreen").classList.remove("hidden");
 function showApp(user) { $("#loginScreen").classList.add("hidden"); $("#appShell").classList.remove("hidden"); $("#userName").textContent = user.name || user.login; $("#userAvatar").src = user.avatar || "assets/komok-translate-icon.jpeg"; }
 async function initAuth() { try { const response = await fetch("/api/me", { credentials: "include" }); const data = await response.json(); if (data.user) showApp(data.user); else showLogin(); } catch { showLogin("Sign in is available on the secure Komok server."); } }
 
-$("#githubLoginButton").addEventListener("click", () => { window.location.href = "/api/auth/github"; });
+function forwardOAuthCallback() {
+  const params = new URLSearchParams(window.location.search);
+  if (!ON_GITHUB_PAGES || !params.get("code") || !params.get("state")) return false;
+  window.location.replace(`${OAUTH_SERVER_ORIGIN}/api/auth/github/callback?code=${encodeURIComponent(params.get("code"))}&state=${encodeURIComponent(params.get("state"))}`);
+  return true;
+}
+
+$("#githubLoginButton").addEventListener("click", () => { window.location.href = `${ON_GITHUB_PAGES ? OAUTH_SERVER_ORIGIN : ""}/api/auth/github`; });
 $("#logoutButton").addEventListener("click", async () => { await fetch("/api/logout", { method: "POST", credentials: "include" }); showLogin(); });
 uiLanguage.addEventListener("change", () => applyInterfaceLanguage(uiLanguage.value));
 sourceText.addEventListener("input", () => { updateCount(); setStatus(""); });
@@ -82,4 +91,4 @@ $("#clearHistoryButton").addEventListener("click", () => { localStorage.removeIt
 $("#themeToggle").addEventListener("click", () => { const next = document.body.dataset.theme === "dark" ? "light" : "dark"; document.body.dataset.theme = next; localStorage.setItem("komok-theme", next); });
 
 const savedTheme = localStorage.getItem("komok-theme"); if (savedTheme) document.body.dataset.theme = savedTheme;
-applyInterfaceLanguage(uiLanguage.value); updateCount(); renderHistory(); initAuth();
+if (!forwardOAuthCallback()) { applyInterfaceLanguage(uiLanguage.value); updateCount(); renderHistory(); initAuth(); }
