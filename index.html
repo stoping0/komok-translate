@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f8fc" />
+    <meta name="description" content="Komok Translate — простой и красивый переводчик для европейских и азиатских языков." />
+    <title>Komok Translate</title>
+    <link rel="icon" type="image/jpeg" href="assets/komok-translate-icon.jpeg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-glow page-glow--one" aria-hidden="true"></div>
+    <div class="page-glow page-glow--two" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Komok Translate, на главную">
+        <span class="brand-mark"><img src="assets/komok-translate-icon.jpeg" alt="" /></span>
+        <span class="brand-name">Komok<span>Translate</span></span>
+      </a>
+      <div class="topbar-actions">
+        <span class="beta-pill">beta</span>
+        <button class="icon-button" id="themeToggle" type="button" aria-label="Переключить тему" title="Переключить тему">
+          <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 15.2A8.5 8.5 0 0 1 8.8 3.5 8.5 8.5 0 1 0 20.5 15.2Z"></path></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> Переводи свободно</div>
+        <h1 id="hero-title">Слова находят<br /><span>свой путь.</span></h1>
+        <p class="hero-copy">Komok Translate помогает быстро понять текст, сохраняя его смысл, интонацию и живой голос.</p>
+        <div class="hero-notes" aria-label="Преимущества">
+          <span><i>✦</i> 50+ языков</span>
+          <span><i>✦</i> Без регистрации</span>
+          <span><i>✦</i> Для любого устройства</span>
+        </div>
+      </section>
+
+      <section class="translator-card" aria-label="Переводчик">
+        <div class="language-bar">
+          <label class="language-control">
+            <span class="control-label">Перевести с</span>
+            <select id="sourceLang" aria-label="Исходный язык"></select>
+          </label>
+          <button class="swap-button" id="swapButton" type="button" aria-label="Поменять языки местами" title="Поменять языки местами">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h11l-3-3M17 17H6l3 3M18 7l-3-3M6 17l3 3"></path></svg>
+          </button>
+          <label class="language-control language-control--target">
+            <span class="control-label">Перевести на</span>
+            <select id="targetLang" aria-label="Целевой язык"></select>
+          </label>
+        </div>
+
+        <div class="translation-panels">
+          <section class="text-panel text-panel--source" aria-labelledby="source-label">
+            <div class="panel-heading">
+              <span id="source-label" class="panel-label">Исходный текст</span>
+              <button class="text-action" id="clearButton" type="button">Очистить</button>
+            </div>
+            <textarea id="sourceText" maxlength="5000" placeholder="Введите текст для перевода..." spellcheck="true">Добро пожаловать в Komok Translate.</textarea>
+            <div class="panel-bottom"><span id="charCount">0 / 5000</span><span class="hint">Ctrl / ⌘ + Enter — перевести</span></div>
+          </section>
+
+          <section class="text-panel text-panel--result" aria-labelledby="result-label">
+            <div class="panel-heading">
+              <span id="result-label" class="panel-label">Перевод</span>
+              <button class="text-action" id="copyButton" type="button">Копировать</button>
+            </div>
+            <div class="translation-result is-empty" id="translationOutput" aria-live="polite">Перевод появится здесь</div>
+            <div class="panel-bottom"><span id="resultLanguage">English</span><span class="result-ready"><span class="status-dot"></span> Готово к переводу</span></div>
+          </section>
+        </div>
+
+        <div class="translate-row">
+          <div class="status-message" id="statusMessage" role="status" aria-live="polite"></div>
+          <button class="translate-button" id="translateButton" type="button">
+            <span class="button-label">Перевести</span>
+            <svg class="button-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+          </button>
+        </div>
+      </section>
+
+      <section class="examples-section" aria-labelledby="examples-title">
+        <div class="section-heading"><span id="examples-title">Попробуйте пример</span><span class="section-line"></span></div>
+        <div class="example-list">
+          <button class="example-chip" type="button" data-example="The future belongs to those who can imagine it.">The future belongs to those who can imagine it.</button>
+          <button class="example-chip" type="button" data-example="Добрые слова понятны на любом языке.">Добрые слова понятны на любом языке.</button>
+          <button class="example-chip" type="button" data-example="La curiosité est le début de la connaissance.">La curiosité est le début de la connaissance.</button>
+        </div>
+      </section>
+
+      <section class="history-section hidden" id="historySection" aria-labelledby="history-title">
+        <div class="section-heading"><span id="history-title">Недавние переводы</span><button class="text-action" id="clearHistoryButton" type="button">Очистить историю</button></div>
+        <div class="history-list" id="historyList"></div>
+      </section>
+    </main>
+
+    <footer class="footer"><span>© 2026 Komok</span><span>Сделано, чтобы понимать друг друга.</span></footer>
+    <script src="app.js"></script>
+  </body>
+</html>
