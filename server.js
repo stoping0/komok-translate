@@ -6,8 +6,8 @@ const path = require("path");
 const { URL } = require("url");
 
 const PORT = Number(process.env.PORT || 3000);
-const CLIENT_ID = process.env.GITHUB_CLIENT_ID;
-const CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
+const CLIENT_ID = String(process.env.GITHUB_CLIENT_ID || "").trim();
+const CLIENT_SECRET = String(process.env.GITHUB_CLIENT_SECRET || "").trim();
 const SESSION_SECRET = process.env.SESSION_SECRET || crypto.randomBytes(32).toString("hex");
 const ROOT = __dirname;
 const CALLBACK_PATH = "/api/auth/github/callback";
